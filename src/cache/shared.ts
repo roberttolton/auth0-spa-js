@@ -44,7 +44,7 @@ export class CacheKey {
 
     if (typeof clientId === 'undefined') throw new Error('Invalid Cache Key, Client ID was undefined');
 
-    return new CacheKey({ clientId, scope, audience }, prefix);
+    return new CacheKey({ clientId, scope, audience } as CacheKeyData, prefix);
   }
 
   /**
