@@ -20,8 +20,8 @@ export class CacheKey {
     public suffix?: string
   ) {
     this.clientId = data.clientId;
-    this.scope = data.scope;
-    this.audience = data.audience;
+    if (data.scope) this.scope = data.scope;
+    if (data.audience) this.audience = data.audience;
   }
 
   /**
@@ -41,6 +41,8 @@ export class CacheKey {
    */
   static fromKey(key: string): CacheKey {
     const [prefix, clientId, audience, scope] = key.split('::');
+
+    if (typeof clientId === 'undefined') throw new Error('Invalid Cache Key, Client ID was undefined');
 
     return new CacheKey({ clientId, scope, audience }, prefix);
   }
